@@ -12,27 +12,21 @@ SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 reps=0
 timer=None
-timer_running=False
 # ---------------------------- TIMER RESET ------------------------------- #
 def reset_timer():
-    global timer_running
     window.after_cancel(timer)
     canvas.itemconfig(timer_text,text="00:00")
     timer_label.config(text="Timer")
     checkbox_label.config(text="")
-    timer_running=False
     global reps
     reps=0
-# ---------------------------- TIMER MECHANISM ------------------------------- # 
+# ---------------------------- TIMER MECHANISM ------------------------------- #
 def start_timer():
-    global reps, timer,timer_running
-    if timer_running:  # Check if a timer is already running
-        return
+    global reps
     reps+=1
     work_sec=WORK_MIN*60
     short_break_sec=SHORT_BREAK_MIN*60
     long_break_sec=LONG_BREAK_MIN*60
-
 
 
     if reps % 8==0:
@@ -46,7 +40,6 @@ def start_timer():
     else:
         countdown(work_sec)
         timer_label["text"]="WORK"
-    timer_running=True
 
 # ---------------------------- COUNTDOWN MECHANISM ------------------------------- #
 def countdown(count):
